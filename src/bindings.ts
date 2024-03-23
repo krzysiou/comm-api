@@ -6,6 +6,7 @@ import { verifyJsonWebToken } from './utils/jwt';
 import { getServerStatus } from './core/server-status/get-server-status';
 import { getUsers } from './core/server-status/get-users';
 import { registerUser } from './core/user/register-user';
+import { loginUser } from './core/user/login-user';
 
 // temporary implementation
 const users: User[] = [];
@@ -29,6 +30,12 @@ const bindings: Binding[] = [
     method: 'POST',
     path: '/register',
     callback: registerUser,
+    middleware: jsonParser,
+  },
+  {
+    method: 'POST',
+    path: '/login',
+    callback: loginUser,
     middleware: jsonParser,
   },
 ];
