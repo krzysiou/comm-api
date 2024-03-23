@@ -17,4 +17,16 @@ interface Binding {
   middleware?: expressMiddleware | expressMiddleware[];
 }
 
-export type { RequestMethod, expressCallback, expressMiddleware, Binding };
+interface User {
+  id: string;
+  username: string;
+  password: string;
+}
+
+export type {
+  RequestMethod,
+  expressCallback,
+  expressMiddleware,
+  Binding,
+  User,
+};
