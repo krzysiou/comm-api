@@ -17,10 +17,19 @@ interface Binding {
   middleware?: expressMiddleware | expressMiddleware[];
 }
 
+type UserInfo = {
+  name: string;
+  surname: string;
+  bio: string;
+  work: string;
+  hobby: string;
+};
+
 interface User {
   id: string;
   username: string;
   password: string;
+  info?: UserInfo;
 }
 
 export type {
