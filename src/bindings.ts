@@ -8,7 +8,7 @@ import { getUsers } from './core/server-status/get-users';
 import { registerUser } from './core/user/register-user';
 import { loginUser } from './core/user/login-user';
 import { editUser } from './core/user/edit-user';
-import { getUser } from './core/user/get-user';
+import { getCurrentUser } from './core/user/get-current-user';
 
 // temporary implementation
 const users: User[] = [];
@@ -42,8 +42,8 @@ const bindings: Binding[] = [
   },
   {
     method: 'GET',
-    path: '/user',
-    callback: getUser,
+    path: '/user/current',
+    callback: getCurrentUser,
     middleware: [jsonParser, verifyJsonWebToken],
   },
   {

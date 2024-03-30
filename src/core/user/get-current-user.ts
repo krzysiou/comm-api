@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 
 import { findUser } from '../../db/find-user';
 
-const getUser = async (req: Request, res: Response) => {
+const getCurrentUser = async (req: Request, res: Response) => {
   const {
     user: { id },
   } = req.body;
@@ -15,7 +15,7 @@ const getUser = async (req: Request, res: Response) => {
       .send({ username: { message: 'Something went wrong' } });
   }
 
-  return res.status(200).send({ user });
+  return res.status(200).send({ ...user });
 };
 
-export { getUser };
+export { getCurrentUser };
