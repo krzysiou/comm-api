@@ -1,5 +1,8 @@
 # comm-api
 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fcomm-api.adaptable.app%2Fstatus)
+
+
 This repository contains the backend API for the Community Collaboration Platform. It serves as the backend server responsible for handling data storage, authentication, and communication with the frontend client.
 
 ## Features
