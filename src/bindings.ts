@@ -4,11 +4,12 @@ import type { Binding, User } from './types';
 
 import { verifyJsonWebToken } from './utils/jwt';
 import { getServerStatus } from './core/server-status/get-server-status';
-import { getUsers } from './core/server-status/get-users';
+import { getUsers } from './core/user/get-users';
 import { registerUser } from './core/user/register-user';
 import { loginUser } from './core/user/login-user';
 import { editUser } from './core/user/edit-user';
 import { getCurrentUser } from './core/user/get-current-user';
+import { getUser } from './core/user/get-user';
 
 // temporary implementation
 const users: User[] = [];
@@ -21,12 +22,6 @@ const bindings: Binding[] = [
     path: '/status',
     callback: getServerStatus,
     middleware: jsonParser,
-  },
-  {
-    method: 'GET',
-    path: '/users',
-    callback: getUsers,
-    middleware: [jsonParser, verifyJsonWebToken],
   },
   {
     method: 'POST',
@@ -42,8 +37,20 @@ const bindings: Binding[] = [
   },
   {
     method: 'GET',
+    path: '/users',
+    callback: getUsers,
+    middleware: [jsonParser, verifyJsonWebToken],
+  },
+  {
+    method: 'GET',
     path: '/user/current',
     callback: getCurrentUser,
+    middleware: [jsonParser, verifyJsonWebToken],
+  },
+  {
+    method: 'POST',
+    path: '/user/other',
+    callback: getUser,
     middleware: [jsonParser, verifyJsonWebToken],
   },
   {
