@@ -43,7 +43,13 @@ Copy the `.env.example` file to `.env` and fill in the necessary configuration d
 
 5. Start the server:
 ```
-npm start
+npm run dev
+```
+
+or
+
+```
+npm run build && npm run start
 ```
 
 6. The API server will be running locally and accessible at `http://localhost:3100`.
