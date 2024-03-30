@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser';
 
-import type { Binding, User } from './types';
+import type { Binding, User, Conversation } from './types';
 
 import { verifyJsonWebToken } from './utils/jwt';
 import { getServerStatus } from './core/server-status/get-server-status';
@@ -10,9 +10,11 @@ import { loginUser } from './core/user/login-user';
 import { editUser } from './core/user/edit-user';
 import { getCurrentUser } from './core/user/get-current-user';
 import { getUser } from './core/user/get-user';
+import { getConversation } from './core/messages/get-conversation';
 
 // temporary implementation
 const users: User[] = [];
+const conversations: Conversation[] = [];
 
 const jsonParser = bodyParser.json();
 
@@ -59,6 +61,12 @@ const bindings: Binding[] = [
     callback: editUser,
     middleware: [jsonParser, verifyJsonWebToken],
   },
+  {
+    method: 'POST',
+    path: '/conversation',
+    callback: getConversation,
+    middleware: [jsonParser, verifyJsonWebToken],
+  },
 ];
 
-export { bindings, users };
+export { bindings, users, conversations };

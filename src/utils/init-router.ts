@@ -1,10 +1,16 @@
+import { createServer } from 'node:http';
+
+import { Server } from 'socket.io';
+
 import type { Express } from 'express';
 import type { Binding } from '../types';
 
 import { logBinding } from './log-binding';
+import { onChatMessage } from '../core/messages/on-chat-message';
 
 const initRouter = (
   app: Express,
+  origin: string,
   port: string | undefined,
   bindings: Binding[]
 ) => {
@@ -41,7 +47,19 @@ const initRouter = (
     }
   });
 
-  app.listen(port, () => {
+  const server = createServer(app);
+  const io = new Server(server, {
+    cors: {
+      origin,
+      methods: ['GET', 'POST'],
+    },
+  });
+
+  io.on('connection', (socket) => {
+    socket.on('chat message', onChatMessage(io));
+  });
+
+  server.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
   });
 };

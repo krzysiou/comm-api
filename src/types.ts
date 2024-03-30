@@ -32,10 +32,24 @@ interface User {
   info?: UserInfo;
 }
 
+interface MessagePayload {
+  senderId: string;
+  recieverId: string;
+  message: string;
+}
+
+interface Conversation {
+  person1Id: string;
+  person2Id: string;
+  messages: MessagePayload[];
+}
+
 export type {
   RequestMethod,
   expressCallback,
   expressMiddleware,
   Binding,
   User,
+  Conversation,
+  MessagePayload,
 };
