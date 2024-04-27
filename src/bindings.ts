@@ -11,6 +11,7 @@ import { editUser } from './core/user/edit-user';
 import { getCurrentUser } from './core/user/get-current-user';
 import { getUser } from './core/user/get-user';
 import { getConversation } from './core/messages/get-conversation';
+import { deleteUser } from './core/user/delete-user';
 
 // temporary implementation
 const users: User[] = [];
@@ -65,6 +66,12 @@ const bindings: Binding[] = [
     method: 'POST',
     path: '/conversation',
     callback: getConversation,
+    middleware: [jsonParser, verifyJsonWebToken],
+  },
+  {
+    method: 'POST',
+    path: '/delete',
+    callback: deleteUser,
     middleware: [jsonParser, verifyJsonWebToken],
   },
 ];
