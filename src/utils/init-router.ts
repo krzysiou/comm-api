@@ -7,6 +7,7 @@ import type { Binding } from '../types';
 
 import { logBinding } from './log-binding';
 import { onChatMessage } from '../core/messages/on-chat-message';
+import { onChatDelete } from '../core/messages/on-chat-delete';
 
 const initRouter = (
   app: Express,
@@ -57,6 +58,7 @@ const initRouter = (
 
   io.on('connection', (socket) => {
     socket.on('chat message', onChatMessage(io));
+    socket.on('chat delete', onChatDelete(io));
   });
 
   server.listen(port, () => {
